@@ -1,11 +1,12 @@
+
 function openPopup(popupElement) {
     popupElement.classList.add('popup_is-opened');
     window.addEventListener('keydown', closeEscape);
   }
-  
+
   function closePopup() {
-   const popupElement = document.querySelector('.popup_is-opened')
-    popupElement.classList.remove('popup_is-opened')
+    const closePopupElement = document.querySelector('.popup_is-opened')
+    closePopupElement.classList.remove('popup_is-opened')
     window.removeEventListener('keydown', closeEscape)
   }
 

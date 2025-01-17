@@ -1,10 +1,11 @@
 // @todo: Функция создания карточки
+const cardTemplate = document.querySelector('#card-template').content;
+const likeButton = document.querySelector('.places__list');
+
 function makeCard(element, callBackDelete, likeActive, hundleModal){
-    const cardTemplate = document.querySelector('#card-template').content; 
     const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
     const imageCard = cardElement.querySelector('.card__image');
     const titleCard = cardElement.querySelector('.card__title');
-    const likeButton = document.querySelector('.places__list')
 
     imageCard.src = element.link;
     imageCard.alt = element.name;
@@ -30,10 +31,10 @@ function deleteCard(cardElement) {
 
   //like Active
 
-function likeIsActive(evt) {
+function addLikeActive(evt) {
     if (evt.target.classList.contains('card__like-button'))
     evt.target.classList.toggle('card__like-button_is-active')
   }
   
 
-  export{makeCard, deleteCard, likeIsActive};
+  export{makeCard, deleteCard, addLikeActive};
