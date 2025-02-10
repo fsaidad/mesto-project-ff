@@ -6,6 +6,7 @@ const config = {
     }
   }
 
+
   const getPersonInfo = () => {
     return fetch(`${config.baseUrl}/users/me`, {
       headers: config.headers

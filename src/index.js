@@ -29,7 +29,8 @@ const popupEditAvatar = document.querySelector('.button_edit-avatar');
 const popupTypeAvatar = document.querySelector('.popup_type_avatar');
 const avatarEditForm = document.forms.avatar;
 const inputAvatarPopup = document.querySelector('.popup__input_type_avatar');
-
+const close = document.querySelectorAll('.popup__close');
+const popup = document.querySelectorAll('.popup');
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -65,10 +66,13 @@ Promise.all(getData)
 
 
   //обраточики на закрытие
-  document.querySelectorAll('.popup__close').forEach(el => el.addEventListener('click', function(){
-    closePopup();
-  }))
-  
+
+  close.forEach(closeButton => {
+    const popup = closeButton.closest(".popup");
+    closeButton.addEventListener("click", () => closePopup(popup));
+  });
+
+
  // обратотчики на открытие 
   popupEdit.addEventListener('click', function () {
     nameInput.value = profileTitle.textContent;
@@ -85,12 +89,19 @@ Promise.all(getData)
     openPopup(popupTypeAvatar);
   }); 
 
+
+
 //закрытие при клике вне модального окна
-function closeClickOutModal(evt) {
+function closeClickOutModal(evt, popup) {
   if (evt.target.classList.contains('popup'))
-    closePopup()
+    closePopup(popup)
 }
-document.querySelectorAll('.popup').forEach(el => el.addEventListener('click', closeClickOutModal))
+
+popup.forEach(overlay => {
+  const popup = overlay.closest(".popup");
+  overlay.addEventListener("click", (evt) => closeClickOutModal(evt, popup));
+});
+
 
 // редактирование профиля
 
@@ -98,18 +109,17 @@ function editProfileFormSubmit(evt) {
     evt.preventDefault(); 
      const savePopupBottun = profileForm.querySelector('.popup__button');
        savePopupBottun.textContent = 'Сохранение...'
-       
-    nameInput.value
-    jobInput.value
-
-    profileTitle.textContent = nameInput.value
-    profileDescription.textContent = jobInput.value
-    
-    editPersonInfo(nameInput.value, jobInput.value)
+    editPersonInfo(nameInput.value, jobInput.value).then((() => {
+      profileTitle.textContent = nameInput.value
+      profileDescription.textContent = jobInput.value
+      closePopup(popupEditProfile) 
+    }))
+    .catch(err => {
+      console.error('Ошибка:', err);
+    })
     .finally(() => { 
       savePopupBottun.textContent = 'Сохранить'
     });
-    closePopup() 
 }
 
 
@@ -128,7 +138,7 @@ function addCardForm(evt) {
   .then(cardData => {
     const newCard = makeCard(cardData, deleteCard, handleLike, openImage, id)
       cardsContainer.prepend(newCard);
-  closePopup()
+  closePopup(popupNewCard)
   cardAddForm.reset();
   clearValidation(popupNewCard, validationConfig)
 })
@@ -159,7 +169,7 @@ function editAvatarForm(evt) {
   editAvatar(inputAvatarPopup.value ).then(person => {
     profileAvatar.style.backgroundImage = `url(${person.avatar}`;
       avatarEditForm.reset();
-    closePopup() 
+    closePopup(popupTypeAvatar) 
   })
   .catch(err => {
     console.error('Ошибка:', err);

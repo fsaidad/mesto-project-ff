@@ -58,7 +58,7 @@ const showInputError = (formElement, inputElement, errorMessage, validationEleme
       formElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
       });
-      const fieldsetList = Array.from(document.querySelectorAll('.popup__content'));
+      const fieldsetList = Array.from(document.querySelectorAll(validationElement.formSelector));
       fieldsetList.forEach((fieldSet) => {
         setEventListeners(fieldSet, validationElement);
       });
