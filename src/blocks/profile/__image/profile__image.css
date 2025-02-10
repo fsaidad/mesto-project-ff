@@ -9,6 +9,33 @@
   margin: 0 29px 0 0;
 }
 
+
+.profile__avatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.button_edit-avatar{
+  width: 128px;
+  height: 122px;
+  background: transparent url('../../../images/edit-icon.svg') center no-repeat;
+  background-size: 26px 26px;
+  border: none;
+  border-radius: 50%;
+  align-self: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+.button_edit-avatar:hover{
+opacity: 1;
+background-color: rgba(0, 0, 0, 0.8);
+}
+
 @media screen and (max-width: 740px) {
   .profile__image {
     margin: 0 10px 0 0;
