@@ -55,11 +55,10 @@ Promise.all(getData)
     cards.forEach((element) => {
       const card = makeCard(element, deleteCard, handleLike, openImage, id);
       cardsContainer.append(card);
-      console.log(cards)
     });
   })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`)
+  .catch(err => {
+    console.error('Ошибка:', err);
   })
 
 
@@ -162,8 +161,8 @@ function editAvatarForm(evt) {
       avatarEditForm.reset();
     closePopup() 
   })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`)
+  .catch(err => {
+    console.error('Ошибка:', err);
   })
   .finally(() => { 
     savePopupBottun.textContent = 'Сохранить'

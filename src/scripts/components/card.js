@@ -37,8 +37,8 @@ function makeCard(element, callBackDelete, handleLike, hundleModal, id){
 function deleteCard(cardElement, id) {
   deletedCard(id).then(()=>
     cardElement.remove())
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`)
+  .catch(err => {
+    console.error('Ошибка:', err);
   })
   }
 
